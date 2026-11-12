@@ -17,7 +17,7 @@ jobs:
       - name: Sign in to Source Cooperative as alukach--source-experiments
         uses: aws-actions/configure-aws-credentials@v6
         with:
-          role-to-assume: arn:aws:iam::alukach--source-experiments:role/FullAccess
+          role-to-assume: arn:aws:iam::alukach--source-demo:role/FullAccess
           audience: ${{ env.AWS_ENDPOINT_URL }}
           sts-endpoint: ${{ env.AWS_ENDPOINT_URL }}/.sts
           aws-region: us-west-2
@@ -26,7 +26,7 @@ jobs:
       - name: Write data
         run: |
           echo "Hello from ${{ github.repository }} run ${{ github.run_id }} at $(date -u +%FT%TZ)" > hello.txt
-          aws s3 cp hello.txt s3://alukach/source-experiments/github-actions/run-${{ github.run_id }}.txt
+          aws s3 cp hello.txt s3://alukach/alukach-experimentation/github-actions/run-${{ github.run_id }}.txt
 
       - name: List product contents
-        run: aws s3 ls s3://alukach/source-experiments/github-actions/
+        run: aws s3 ls s3://alukach/alukach-experimentation
